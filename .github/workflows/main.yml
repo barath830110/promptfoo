@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+      - name: Install langchain_ollama
+        run: pip install langchain_ollama
 
       - name: Install PromptFoo
         run: npm install -g promptfoo
