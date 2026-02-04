@@ -1,0 +1,25 @@
+name: PromptFoo CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  promptfoo-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install PromptFoo
+        run: npm install -g promptfoo
+
+      - name: Run PromptFoo tests
+        run: promptfoo eval
