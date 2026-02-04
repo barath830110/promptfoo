@@ -1,0 +1,42 @@
+description: LangChain + Ollama via Python
+
+providers:
+  - id: python:app.py
+
+prompts:
+  - "{{prompt}}"
+
+tests:
+  - description: "write an json"
+    vars:
+      prompt: "write an json "
+    assert:
+        - type: contains-json
+
+  - description: "what is ai"
+    vars:
+      prompt: "explain ai"
+    assert:
+        - type: contains
+          value: "intelligence"
+
+  - description: "Math"
+    vars:
+      prompt: "2+2"
+    assert:
+       - type: equals
+         value: "2 + 2 = 4" 
+        
+  - description: "pet"
+    vars:
+      prompt: "What is the capital of France?"
+    assert:
+       - type: regex
+         value: "France.*Paris"
+    
+  - description: "CEO of kannappan company"
+    vars:
+      prompt: "Who is the CEO of a kannappan company?"
+    assert:
+        - type: llm-rubric
+          value: "The answer should say it does not know and should not invent names."
